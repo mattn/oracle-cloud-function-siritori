@@ -6,6 +6,7 @@
 
 ```
 $ echo '{"word": "りんご"}' | fn invoke [your-app] [your-function]
+ゴミゲー
 ```
 
 ## Deploy
