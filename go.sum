@@ -1,4 +1,8 @@
 github.com/fnproject/fdk-go v0.0.1 h1:BOeu3TBeOWkAxyKWmBUSG2BHWYgQhvRLO0kph4vE2e0=
 github.com/fnproject/fdk-go v0.0.1/go.mod h1:9m+nEyku9SqJAVJQsfZOZBQzFkCs+jvmbZJhvgDX4ts=
+github.com/fnproject/fdk-go v0.0.43 h1:efHy4hqV5ZpMl319pa++dkeCFWmTnts8mW+h3R6NTNY=
+github.com/fnproject/fdk-go v0.0.43/go.mod h1:hCpiyW8oIJpRdegoLf8PxKf9k+8mZZGeYgwSKOVG+K0=
 github.com/rakyll/statik v0.1.6 h1:uICcfUXpgqtw2VopbIncslhAmE5hwc4g20TEyEENBNs=
 github.com/rakyll/statik v0.1.6/go.mod h1:OEi9wJV/fMUAGx1eNjq75DKDsJVuEv1U0oYdX6GX8Zs=
+github.com/rakyll/statik v0.1.7 h1:OF3QCZUuyPxuGEP7B4ypUa7sB/iHtqOTDYZXGM8KOdQ=
+github.com/rakyll/statik v0.1.7/go.mod h1:AlZONWzMtEnMs7W4e/1LURLiI49pIMmp6V9Unghqrcc=

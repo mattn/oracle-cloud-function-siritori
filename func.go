@@ -3,16 +3,19 @@ package main
 import (
 	"bufio"
 	"context"
+	"embed"
 	"encoding/json"
 	"errors"
 	"io"
 	"math/rand"
 	"strings"
 
-	_ "func/statik"
-
 	fdk "github.com/fnproject/fdk-go"
-	"github.com/rakyll/statik/fs"
+)
+
+var (
+	//go:embed public
+	fs embed.FS
 )
 
 var upper = strings.NewReplacer(
@@ -48,11 +51,7 @@ func search(text string) (string, error) {
 	rs := []rune(text)
 	r := rs[len(rs)-1]
 
-	statikFS, err := fs.New()
-	if err != nil {
-		return "", err
-	}
-	f, err := statikFS.Open("/dict.txt")
+	f, err := fs.Open("public/dict.txt")
 	if err != nil {
 		return "", err
 	}
