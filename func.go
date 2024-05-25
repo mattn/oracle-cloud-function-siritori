@@ -112,7 +112,8 @@ func main() {
 }
 
 type Siritori struct {
-	Word string `json:"word"`
+	Word string `json:"word,omitempty"`
+	Err  string `json:"err,omitempty"`
 }
 
 func myHandler(ctx context.Context, in io.Reader, out io.Writer) {
@@ -121,7 +122,8 @@ func myHandler(ctx context.Context, in io.Reader, out io.Writer) {
 	var err error
 	s.Word, err = handleText(s.Word)
 	if err != nil {
-		s.Word = err.Error()
+		s.Err = err.Error()
 	}
+	fdk.SetHeader(out, "content-type", "application/json")
 	json.NewEncoder(out).Encode(&s)
 }
