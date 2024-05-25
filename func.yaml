@@ -1,6 +1,6 @@
 schema_version: 20180708
 name: siritori
-version: 0.0.21
+version: 0.0.22
 runtime: go
 build_image: fnproject/go:1.19-dev
 run_image: fnproject/go:1.19
