@@ -6,8 +6,11 @@ import (
 	"embed"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"math/rand"
+	"mime"
+	"net/url"
 	"strings"
 
 	fdk "github.com/fnproject/fdk-go"
@@ -116,10 +119,46 @@ type Siritori struct {
 	Err  string `json:"err,omitempty"`
 }
 
+func inputErr(out io.Writer, v any) {
+	json.NewEncoder(out).Encode(Siritori{
+		Word: "",
+		Err:  fmt.Sprintf("cannot decode input image: %v", v),
+	})
+}
+
 func myHandler(ctx context.Context, in io.Reader, out io.Writer) {
+	fctx, ok := fdk.GetContext(ctx).(fdk.HTTPContext)
+	if !ok {
+		inputErr(out, "invalid format")
+		return
+	}
+	typ, _, err := mime.ParseMediaType(fctx.ContentType())
+	if err != nil {
+		inputErr(out, err)
+		return
+	}
+
 	var s Siritori
-	json.NewDecoder(in).Decode(&s)
-	var err error
+	if typ == "application/json" {
+		err = json.NewDecoder(in).Decode(&s)
+	} else {
+		b, err := io.ReadAll(in)
+		if err != nil {
+			inputErr(out, err)
+			return
+		}
+		values, err := url.ParseQuery(string(b))
+		if err != nil {
+			inputErr(out, err)
+			return
+		}
+		s.Word = values.Get("word")
+	}
+	if err != nil {
+		inputErr(out, err)
+		return
+	}
+
 	s.Word, err = handleText(s.Word)
 	if err != nil {
 		s.Err = err.Error()
